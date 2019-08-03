@@ -1,9 +1,6 @@
 {
   "app": {
-    "env": "staging",
-    "secret": "dev-secret",
-    "url": "http://app:8080",
-    "port": 8080
+    "port": 9090
   },
   "database": "jdbc:postgresql://postgres:5432/staging"
 }

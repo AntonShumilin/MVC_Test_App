@@ -1,6 +1,8 @@
 package Config;
 
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +17,36 @@ public class Config {
     public Github github = new Github();
     public Telegram telegram = new Telegram();
 
+    public void readConfig (ConfigFromFile cff) {
+        if (cff.app.env != null) app.env = cff.app.env;
+        if (cff.app.secret != null) app.secret = cff.app.secret;
+        if (cff.app.url != null) app.url = cff.app.url;
+        if (cff.app.port != 0) app.port = cff.app.port;
+
+        if (cff.database != null) database = cff.database;
+
+        if (cff.oauth.clientId != null) oauth.clientId = cff.oauth.clientId;
+        if (cff.oauth.secret != null) oauth.secret = cff.oauth.secret;
+        if (cff.oauth.adminUsers != null) oauth.adminUsers = cff.oauth.adminUsers;
+
+        if (cff.sparkpost.apiKey != null) sparkpost.apiKey = cff.sparkpost.apiKey;
+        if (cff.sparkpost.ipPool != null) sparkpost.ipPool = cff.sparkpost.ipPool;
+        if (cff.sparkpost.returnPath != null) sparkpost.returnPath = cff.sparkpost.returnPath;
+
+        if (cff.google.analytics != null) google.analytics = cff.google.analytics;
+        if (cff.google.maps != null) google.maps = cff.google.maps;
+
+        if (cff.maildev.host != null) maildev.host = cff.maildev.host;
+        if (cff.maildev.web != 0) maildev.web = cff.maildev.web;
+        if (cff.maildev.smtp != 0) maildev.smtp = cff.maildev.smtp;
+        if (cff.maildev.basePathname != null) maildev.basePathname = cff.maildev.basePathname;
+
+        if (cff.github.accessToken != null) github.accessToken = cff.github.accessToken;
+
+        if (cff.telegram.bot != null) telegram.bot = cff.telegram.bot;
+        if (cff.telegram.leadsChat != null) telegram.leadsChat = cff.telegram.leadsChat;
+    }
+
     //Singleton
     public static Config instance;
     public Config() {};
@@ -24,15 +56,12 @@ public class Config {
         }
         return instance;
     }
-
-
     public class App {
         public String env = "development";
         public String secret = "dev-secret";
-        public String url = "http://localhost:8080";
+        public String url = "localhost";
         public Integer port = 8080;
     }
-
     class Oauth {
         String clientId = "apps.googleusercontent.com";
         String secret = "1111111";

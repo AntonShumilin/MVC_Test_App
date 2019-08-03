@@ -1,6 +1,7 @@
 package Main;
 
 import Config.Config;
+import Config.ConfigFromFile;
 import Controller.AuthServlet;
 import Controller.RegServlet;
 import Models.User;
@@ -11,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -22,6 +24,7 @@ import java.io.FileReader;
 
 public class Main {
     public static Config config = Config.getInstance();
+    public static ConfigFromFile configFromFile;
     public static void main(String[] args) throws Exception {
         //дефолтный конфиг
 
@@ -38,7 +41,8 @@ public class Main {
             while ((s = br.readLine()) != null) {
                 sb.append(s);
             }
-            config = gson.fromJson(sb.toString(), Config.class);
+            configFromFile = gson.fromJson(sb.toString(), ConfigFromFile.class);
+            config.readConfig(configFromFile);
         } catch (Exception e){
             System.out.println("No config file / Config file not valid");
         }
@@ -67,14 +71,14 @@ public class Main {
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, context});
 
-        Server server = new Server(8080);
+        Server server = new Server (config.app.port);
         server.setHandler(handlers);
 
-//        ServerConnector connector = new ServerConnector(server);
-//        connector.setHost("192.168.88.234");
-//        connector.setPort(8080);
-//        connector.setIdleTimeout(idleTimeout);
-//        server.addConnector(connector);
+        ServerConnector connector = new ServerConnector(server);
+        connector.setHost(config.app.url);
+        //connector.setPort(config.app.port);
+        connector.setIdleTimeout(300000);
+        server.addConnector(connector);
 
         server.start();
         server.join();
