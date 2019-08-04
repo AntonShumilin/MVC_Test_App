@@ -66,7 +66,8 @@ public class Main {
 
         // стартуем веб сервер
         ResourceHandler resource_handler = new ResourceHandler();
-        resource_handler.setResourceBase("public_html");
+        resource_handler.setResourceBase("html");
+        //resource_handler.setResourceBase("/");
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, context});
