@@ -39,7 +39,7 @@ public class AuthServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_FOUND);
-        response.sendRedirect("/profile.html");
+        response.sendRedirect("/api/v1/dashboard.html");
 
     }
 

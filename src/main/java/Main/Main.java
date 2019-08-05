@@ -3,10 +3,13 @@ package Main;
 import Config.Config;
 import Config.ConfigFromFile;
 import Controller.AuthServlet;
+import Controller.LoadCheckServlet;
+import Controller.LoadCheckServlet;
 import Controller.RegServlet;
 import Models.User;
 import Models.UsersMap;
 import View.GetJSONServlet;
+import View.ViewAllCheks;
 import View.ViewProfileServlet;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -17,10 +20,13 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.webapp.WebAppContext;
 
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+
+import static com.sun.javafx.scene.control.skin.Utils.getResource;
 
 public class Main {
     public static Config config = Config.getInstance();
@@ -48,7 +54,6 @@ public class Main {
         }
 
 
-
         // создаем дефолтных юзеров
         UsersMap usersMap = new UsersMap();
         usersMap.addNewUser(new User("admin"));
@@ -59,15 +64,26 @@ public class Main {
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new RegServlet(usersMap)), "/reg/signUpForm");
         context.addServlet(new ServletHolder(new AuthServlet(usersMap)), "/auth");
-        context.addServlet(new ServletHolder(new ViewProfileServlet(usersMap)), "/profile/viewprofile");
-        context.addServlet(new ServletHolder(new GetJSONServlet(usersMap)), "/profile/getjson");
+        context.addServlet(new ServletHolder(new ViewProfileServlet(usersMap)), "/viewprofile");
+        context.addServlet(new ServletHolder(new GetJSONServlet(usersMap)), "/getConfigJson");
+        context.addServlet(new ServletHolder(new LoadCheckServlet(usersMap)), "/loadcheck");
+        context.addServlet(new ServletHolder(new ViewAllCheks(usersMap)), "/viewallchecks");
 
 
 
         // стартуем веб сервер
         ResourceHandler resource_handler = new ResourceHandler();
+
+
+//        String webDir = Main.class.getProtectionDomain()
+//                .getCodeSource().getLocation().toExternalForm();
+//        WebAppContext webappContext = new WebAppContext(webDir, "/html");
+       // resource_handler.setResourceBase(webDir);
+
+       // context.setResourceBase(Main.class.getClassLoader().getResource("html/index.html").toExternalForm());
         resource_handler.setResourceBase("html");
-        //resource_handler.setResourceBase("/");
+
+
 
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[]{resource_handler, context});

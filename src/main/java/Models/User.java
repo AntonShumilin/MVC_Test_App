@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.Date;
+import java.util.HashMap;
 
 public class User {
     private String login;
@@ -11,6 +12,15 @@ public class User {
     private Date createdAt;
     private Date updatedAt;
     private Date deletedAt;
+    public HashMap <String, Check> userChecks = new HashMap<String, Check>();
+
+    public void addCheck (Check check) {
+        userChecks.put(check.dateTime + check.fiscalSign, check);
+    }
+    public Check getCheckByFS (String fs) {
+        return userChecks.get(fs);
+    }
+
 
     public User(String login, String password, String firstName, String lastName, String email) {
         this.login = login;

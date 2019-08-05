@@ -7,9 +7,11 @@ public class UsersMap {
     private final Map<String, User> loginsMap;
     private final Map<String, User> sessionsMap;
 
+
     public UsersMap() {
         loginsMap = new HashMap<>();
         sessionsMap = new HashMap<>();
+
     }
 
     public void addNewUser(User user) {
@@ -23,4 +25,7 @@ public class UsersMap {
     public void addSession (String session, User user) {sessionsMap.put(session, user);}
 
     public User getUserBySession (String session) {return sessionsMap.get(session);}
+
+
+
 }
