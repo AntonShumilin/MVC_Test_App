@@ -30,7 +30,12 @@ public class ViewAllCheks extends HttpServlet {
             checkView.add("Date " + user.getCheckByFS(key).dateTime + " " + "Sum nal " + user.getCheckByFS(key).cashTotalSum + " " + "Sum beznal " + user.getCheckByFS(key).ecashTotalSum);
         }
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println(checkView);
+        for (String s : checkView) {
+            response.getWriter().println(s);
+            response.getWriter().println("<br />");
+
+        }
+
 
 
     }
