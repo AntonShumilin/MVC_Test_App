@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.UserDAO;
 import Models.User;
 import Models.UsersMap;
 
@@ -11,11 +12,12 @@ import java.io.IOException;
 
 public class RegServlet extends HttpServlet {
 
-    private UsersMap usersMap;
+    UserDAO userDAO;
 
-    public RegServlet(UsersMap usersMap) {
-        this.usersMap = usersMap;
+    public RegServlet(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
+
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
@@ -28,14 +30,15 @@ public class RegServlet extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
+
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
+
         email = email.toLowerCase();
 
-        if (usersMap.getUserByLogin(login)!=null) {
+        if (userDAO.getUserByEmail(email)!=null) {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().println("Имя занято");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -56,7 +59,7 @@ public class RegServlet extends HttpServlet {
             return;
         }
 
-        usersMap.addNewUser(new User(login, password, firstName, lastName, email));
+        userDAO.save(new User(email, password, firstName, lastName));
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println("Вы зарегистрированы");
         response.setStatus(HttpServletResponse.SC_OK);

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Config {
     public App app = new App();
-    public String database ="jdbc:postgresql://localhost:5432/test";
+    public String database ="jdbc:postgresql://localhost:5432/postgres";
     public Oauth oauth = new Oauth();
     public Sparkpost sparkpost = new Sparkpost();
     public Google google = new Google();

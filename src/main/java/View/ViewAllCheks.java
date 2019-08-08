@@ -1,6 +1,7 @@
 package View;
 
-import Models.Check;
+import DAO.UserDAO;
+import Models.CheckWeb;
 import Models.User;
 import Models.UsersMap;
 
@@ -14,20 +15,22 @@ import java.util.Map;
 
 public class ViewAllCheks extends HttpServlet {
 
-    private UsersMap usersMap;
+    UserDAO userDAO;
 
-    public ViewAllCheks(UsersMap usersMap) {
-        this.usersMap = usersMap;
+    public ViewAllCheks(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        User user = usersMap.getUserBySession(request.getSession().getId());
+        User user = userDAO.getUserBySession(request.getSession().getId());
         ArrayList<String> checkView = new ArrayList<>();
-        for (Map.Entry<String, Check> entry: user.userChecks.entrySet()) {
+        for (Map.Entry<String, CheckWeb> entry: user.userChecks.entrySet()) {
             String key = entry.getKey();
-            checkView.add("Date " + user.getCheckByFS(key).dateTime + " " + "Sum nal " + user.getCheckByFS(key).cashTotalSum + " " + "Sum beznal " + user.getCheckByFS(key).ecashTotalSum);
+            checkView.add("Date " + user.getCheckByFS(key).document.receipt.dateTime + " " + "Sum nal " +
+                                    user.getCheckByFS(key).document.receipt.cashTotalSum + " " + "Sum beznal " +
+                                    user.getCheckByFS(key).document.receipt.ecashTotalSum);
         }
         response.setContentType("text/html;charset=utf-8");
         for (String s : checkView) {

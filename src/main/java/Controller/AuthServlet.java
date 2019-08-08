@@ -1,5 +1,6 @@
 package Controller;
 
+import DAO.UserDAO;
 import Models.User;
 import Models.UsersMap;
 
@@ -11,31 +12,31 @@ import java.io.IOException;
 
 public class AuthServlet extends HttpServlet {
 
-    private UsersMap usersMap;
+    UserDAO userDAO;
 
-    public AuthServlet(UsersMap usersMap) {
-        this.usersMap = usersMap;
+    public AuthServlet(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("login");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        if (login == null || password == null) {
+        if (email == null || password == null) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
-        User user = usersMap.getUserByLogin(login);
+        User user = userDAO.getUserByEmail(email);
         if (user == null || !user.getPassword().equals(password)) {
             response.setContentType("text/html;charset=utf-8");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
 
-        usersMap.addSession(request.getSession().getId(), user);
+        userDAO.addSession(request.getSession().getId(), user);
 
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_FOUND);

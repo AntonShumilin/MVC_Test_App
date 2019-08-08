@@ -1,15 +1,12 @@
 package Controller;
 
-import Config.ConfigFromFile;
-import Main.Main;
-import Models.Check;
+import DAO.UserDAO;
+import Models.CheckWeb;
 import Models.UsersMap;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileItemIterator;
-import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
@@ -19,18 +16,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import static Main.Main.configFromFile;
-
 public class LoadCheckServlet extends HttpServlet {
 
-    private UsersMap usersMap;
+    UserDAO userDAO;
 
-    public LoadCheckServlet(UsersMap usersMap) {
-        this.usersMap = usersMap;
+    public LoadCheckServlet(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -59,11 +53,11 @@ public class LoadCheckServlet extends HttpServlet {
         }
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
-        Check check = gson.fromJson(sb.toString(), Check.class);
-        usersMap.getUserBySession(request.getSession().getId()).addCheck(check);
+        CheckWeb checkWeb = gson.fromJson(sb.toString(), CheckWeb.class);
+        userDAO.getUserBySession(request.getSession().getId()).addCheck(checkWeb);
 
 
-        String json = gson.toJson(check);
+        String json = gson.toJson(checkWeb);
         response.setContentType("application/json");
         response.getWriter().println(json);
         response.setStatus(HttpServletResponse.SC_OK);
@@ -78,7 +72,7 @@ public class LoadCheckServlet extends HttpServlet {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
 
-        Check check;
+        CheckWeb checkWeb;
 
         StringBuilder sb = new StringBuilder();
         String s = "";
@@ -93,12 +87,12 @@ public class LoadCheckServlet extends HttpServlet {
         } catch (Exception e){
             System.out.println("No json file / json file not valid");
         }
-        check = gson.fromJson(sb.toString(), Check.class);
+        checkWeb = gson.fromJson(sb.toString(), CheckWeb.class);
 
-        usersMap.getUserBySession(request.getSession().getId()).addCheck(check);
+        userDAO.getUserBySession(request.getSession().getId()).addCheck(checkWeb);
 
 
-        String json = gson.toJson(check);
+        String json = gson.toJson(checkWeb);
         response.setContentType("application/json");
         response.getWriter().println(json);
         response.setStatus(HttpServletResponse.SC_OK);

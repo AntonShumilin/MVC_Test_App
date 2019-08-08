@@ -1,5 +1,6 @@
 package View;
 
+import DAO.UserDAO;
 import Main.Main;
 import Models.User;
 import Models.UsersMap;
@@ -13,11 +14,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class GetJSONServlet extends HttpServlet {
-    private UsersMap usersMap;
+    UserDAO userDAO;
 
-    public GetJSONServlet(UsersMap usersMap) {
-        this.usersMap = usersMap;
+    public GetJSONServlet(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
+
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 

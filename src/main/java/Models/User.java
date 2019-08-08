@@ -1,57 +1,77 @@
 package Models;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
-public class User {
-    private String login;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private Date createdAt;
-    private Date updatedAt;
-    private Date deletedAt;
-    public HashMap <String, Check> userChecks = new HashMap<String, Check>();
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
-    public void addCheck (Check check) {
-        userChecks.put(check.dateTime + check.fiscalSign, check);
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "email", unique = true, updatable = false)
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "firstName")
+    private String firstName;
+
+    @Column(name = "LastName")
+    private String lastName;
+
+    @Column(name = "createdAt")
+    private Date createdAt;
+
+    @Column(name = "updatedAt")
+    private Date updatedAt;
+
+    @Column(name = "deletedAT")
+    private Date deletedAt;
+
+    public User () {
+
     }
-    public Check getCheckByFS (String fs) {
+
+
+
+
+
+    public HashMap <String, CheckWeb> userChecks = new HashMap<String, CheckWeb>();
+
+    public void addCheck (CheckWeb checkWeb) {
+        userChecks.put(checkWeb.document.receipt.dateTime + checkWeb.document.receipt.fiscalSign, checkWeb);
+    }
+    public CheckWeb getCheckByFS (String fs) {
         return userChecks.get(fs);
     }
 
 
-    public User(String login, String password, String firstName, String lastName, String email) {
-        this.login = login;
+    public User(String email, String password, String firstName, String lastName) {
+        this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.createdAt = new Date();
+        this.updatedAt = createdAt;
+    }
+
+        public User(String email, String password) {
         this.email = email;
-        this.createdAt = new Date();
-        this.updatedAt = createdAt;
-    }
-
-    public User(String login) {
-        this.login = login;
-        this.password = login;
-        this.firstName = login;
-        this.lastName = login;
-        this.email = "email";
-        this.createdAt = new Date();
-        this.updatedAt = createdAt;
-    }
-
-    public User(String login, String password) {
-        this.login = login;
         this.password = password;
         this.createdAt = new Date();
         this.updatedAt = createdAt;
     }
 
-    public String getLogin() {
-        return login;
-    }
+    public long getId() { return id; }
+
+    public String getEmail() { return email; }
 
     public String getPassword() {
         return password;
@@ -65,9 +85,7 @@ public class User {
         return lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
+
 
     public Date getCreatedAt() {
         return createdAt;
