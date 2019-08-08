@@ -30,7 +30,8 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        //конфигурация и коннект к БД
+
+
         DBFactoryUtil dbFactoryUtil = new DBFactoryUtil();
         dbFactoryUtil.printConnectInfo();
         UserDAO userDAO = new UserDAO(dbFactoryUtil);
