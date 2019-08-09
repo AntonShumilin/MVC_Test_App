@@ -5,6 +5,8 @@ import Config.ConfigFromFile;
 import Controller.AuthServlet;
 import Controller.LoadCheckServlet;
 import Controller.RegServlet;
+import DAO.CheckDAO;
+import DAO.ReceiptDAO;
 import DAO.UserDAO;
 import View.GetJSONServlet;
 import View.ViewAllCheks;
@@ -33,9 +35,9 @@ public class Main {
 
 
         DBFactoryUtil dbFactoryUtil = new DBFactoryUtil();
-        dbFactoryUtil.printConnectInfo();
+        //dbFactoryUtil.printConnectInfo();
         UserDAO userDAO = new UserDAO(dbFactoryUtil);
-
+        ReceiptDAO receiptDAO = new ReceiptDAO(dbFactoryUtil);
 
         // подготовка json builder
         GsonBuilder builder = new GsonBuilder();
@@ -61,8 +63,8 @@ public class Main {
         context.addServlet(new ServletHolder(new AuthServlet(userDAO)), "/auth");
         context.addServlet(new ServletHolder(new ViewProfileServlet(userDAO)), "/viewprofile");
         context.addServlet(new ServletHolder(new GetJSONServlet(userDAO)), "/getConfigJson");
-        context.addServlet(new ServletHolder(new LoadCheckServlet(userDAO)), "/loadcheck");
-        context.addServlet(new ServletHolder(new ViewAllCheks(userDAO)), "/viewallchecks");
+        context.addServlet(new ServletHolder(new LoadCheckServlet(userDAO, receiptDAO)), "/loadcheck");
+        context.addServlet(new ServletHolder(new ViewAllCheks(userDAO, receiptDAO)), "/viewallchecks");
 
 
 

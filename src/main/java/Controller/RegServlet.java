@@ -52,12 +52,12 @@ public class RegServlet extends HttpServlet {
             return;
         }
 
-        if ((!email.contains("@")) || (!email.contains("."))) {
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().println("Неверный email");
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
-        }
+//        if ((!email.contains("@")) || (!email.contains("."))) {
+//            response.setContentType("text/html;charset=utf-8");
+//            response.getWriter().println("Неверный email");
+//            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+//            return;
+//        }
 
         userDAO.save(new User(email, password, firstName, lastName));
         response.setContentType("text/html;charset=utf-8");

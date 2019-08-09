@@ -23,7 +23,7 @@ public class User implements Serializable {
     @Column(name = "firstName")
     private String firstName;
 
-    @Column(name = "LastName")
+    @Column(name = "lastName")
     private String lastName;
 
     @Column(name = "createdAt")
@@ -43,14 +43,14 @@ public class User implements Serializable {
 
 
 
-    public HashMap <String, CheckWeb> userChecks = new HashMap<String, CheckWeb>();
-
-    public void addCheck (CheckWeb checkWeb) {
-        userChecks.put(checkWeb.document.receipt.dateTime + checkWeb.document.receipt.fiscalSign, checkWeb);
-    }
-    public CheckWeb getCheckByFS (String fs) {
-        return userChecks.get(fs);
-    }
+//    public HashMap <String, Check> userChecks = new HashMap<String, Check>();
+//
+//    public void addCheck (Check check) {
+//        userChecks.put(check.document.receipt.dateTime + check.document.receipt.fiscalSign, check);
+//    }
+//    public Check getCheckByFS (String fs) {
+//        return userChecks.get(fs);
+//    }
 
 
     public User(String email, String password, String firstName, String lastName) {

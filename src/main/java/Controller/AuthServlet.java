@@ -32,6 +32,7 @@ public class AuthServlet extends HttpServlet {
         User user = userDAO.getUserByEmail(email);
         if (user == null || !user.getPassword().equals(password)) {
             response.setContentType("text/html;charset=utf-8");
+            response.getWriter().println("Неверные имя пользователяпароль");
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }

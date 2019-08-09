@@ -1,6 +1,7 @@
 package DAO;
 
 import Main.DBFactoryUtil;
+import Models.Check;
 import Models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -9,6 +10,7 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserDAO {
@@ -22,9 +24,13 @@ public class UserDAO {
     }
 
 
+
     public User findById(long id) throws HibernateException {
         return(User) dbFactoryUtil.getSessionFactory().openSession().get(User.class, id);
     }
+//    public long getId(User user) throws HibernateException {
+//        return (long) dbFactoryUtil.getSessionFactory().openSession().get(User.class, user);
+//    }
 
     public User getUserByEmail(String email)  {
         Criteria criteria = dbFactoryUtil.sessionFactory.openSession().createCriteria(User.class);

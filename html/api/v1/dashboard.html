@@ -5,25 +5,33 @@
     <title>Dashboard</title>
 </head>
 <body>
-<a href="/viewprofile"> /me </a>
-<br />
-<a href="/getConfigJson"> /getConfigJson </a>
-<br />
+    <a href="/viewprofile"> /me </a>
+        <br />
+    <a href="/viewallchecks"> /checks </a>
+        <br />
+    <form action="/viewallchecks" method="POST">
+    CheckId: <input type="text" name="checkId"/>
+            <input type="submit" value="Submit">
+    </form>
+        <br />
+    <form  action="/loadcheck" method="post" enctype="multipart/form-data">
+    <input name="data" type="file"><br>
+    <input type="submit"><br>
+    </form>
+        <br />
+
 <br />
 <fieldset>
     <legend>Loadcheck</legend>
-<form  action="/loadcheck" method="post" enctype="multipart/form-data">
 
-    <input name="data" type="file"><br>
-    <input type="submit"><br>
-</form>
 </fieldset>
 <br />
+    <a href="/getConfigJson"> /getConfigJson </a>
 <br />
 
 
 
-<a href="/viewallchecks"> /viewallchecks </a>
+
 <br />
 
 
