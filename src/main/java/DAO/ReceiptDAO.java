@@ -1,16 +1,12 @@
 package DAO;
 
 import Main.DBFactoryUtil;
-import Models.Check;
 import Models.Receipt;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.query.Query;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReceiptDAO {

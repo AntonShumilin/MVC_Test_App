@@ -1,5 +1,4 @@
 package View;
-
 import DAO.UserDAO;
 import Main.CheckAuthUtil;
 import Models.User;
@@ -11,11 +10,12 @@ import java.io.IOException;
 
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
-public class ViewProfileServlet extends HttpServlet {
+
+public class ViewUserById extends HttpServlet {
 
     UserDAO userDAO;
 
-    public ViewProfileServlet(UserDAO userDAO) {
+    public ViewUserById(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
@@ -24,16 +24,23 @@ public class ViewProfileServlet extends HttpServlet {
 
         if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
 
-        User user = userDAO.getUserBySession(request.getSession().getId());
+        String pathInfo = request.getPathInfo();
+        pathInfo = pathInfo.replace("/","");
 
-        String json = getGsonBuilderExpose().toJson(user);
+        long userId;
+        try {
+            userId = Integer.parseInt(pathInfo);
+        } catch (Exception e) {
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().println("косяк");
+            response.setStatus(HttpServletResponse.SC_OK);
+            return;
+        }
+
+        User user = userDAO.findById(userId);
 
         response.setContentType("application/json");
-        response.getWriter().println(json);
+        response.getWriter().println(getGsonBuilderExpose().toJson(user));
         response.setStatus(HttpServletResponse.SC_OK);
-
     }
-
-
-
 }

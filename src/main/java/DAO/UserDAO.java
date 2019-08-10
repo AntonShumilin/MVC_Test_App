@@ -1,14 +1,12 @@
 package DAO;
 
 import Main.DBFactoryUtil;
-import Models.Check;
 import Models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +21,14 @@ public class UserDAO {
         sessionsMap = new HashMap<>();
     }
 
-
+    public List<User> findAllUsers () {
+        Criteria criteria = dbFactoryUtil.sessionFactory.openSession().createCriteria(User.class);
+        return criteria.list();
+    }
 
     public User findById(long id) throws HibernateException {
         return(User) dbFactoryUtil.getSessionFactory().openSession().get(User.class, id);
     }
-//    public long getId(User user) throws HibernateException {
-//        return (long) dbFactoryUtil.getSessionFactory().openSession().get(User.class, user);
-//    }
 
     public User getUserByEmail(String email)  {
         Criteria criteria = dbFactoryUtil.sessionFactory.openSession().createCriteria(User.class);
@@ -45,9 +43,17 @@ public class UserDAO {
         session.close();
     }
 
-    public void addSession (String session, User user) {sessionsMap.put(session, user);}
+    public void addSession (String session, User user) {
+        sessionsMap.put(session, user);
+    }
 
     public User getUserBySession (String session) {return sessionsMap.get(session);}
+
+    public void removeSession (String session, User user){
+        sessionsMap.remove(session, user);
+    }
+
+
 
 
 

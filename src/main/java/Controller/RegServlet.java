@@ -22,7 +22,23 @@ public class RegServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
 
         response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println("страница регистрации");
+        response.getWriter().println("<head>");
+        response.getWriter().println("<meta charset=\"UTF-8\"/>");
+        response.getWriter().println("<title>TestServer</title>");
+        response.getWriter().println("</head>");
+        response.getWriter().println("<body>");
+        response.getWriter().println("<form action=\"/reg\" method=\"POST\">");
+        response.getWriter().println("Email: <input type=\"text\" name=\"email\"/>");
+        response.getWriter().println("Password: <input type=\"password\" name=\"password\"/>");
+        response.getWriter().println("<p></p>");
+        response.getWriter().println("firstName: <input type=\"text\" name=\"firstName\"/>");
+        response.getWriter().println("lastName: <input type=\"text\" name=\"lastName\"/>");
+        response.getWriter().println("<input type=\"submit\" value=\"Регистрация\">");
+        response.getWriter().println("</form>");
+        response.getWriter().println("<a href=\"/\"> Назад </a>");
+        response.getWriter().println("<hr>");
+        response.getWriter().println("</body>");
+        response.getWriter().println("</html>");
         response.setStatus(HttpServletResponse.SC_OK);
 
     }

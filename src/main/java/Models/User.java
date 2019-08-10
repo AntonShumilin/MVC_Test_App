@@ -1,9 +1,10 @@
 package Models;
 
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 
 @Entity
 @Table(name = "users")
@@ -14,24 +15,31 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Expose
     @Column(name = "email", unique = true, updatable = false)
     private String email;
 
+    @Expose
     @Column(name = "password")
     private String password;
 
+    @Expose
     @Column(name = "firstName")
     private String firstName;
 
+    @Expose
     @Column(name = "lastName")
     private String lastName;
 
+    @Expose
     @Column(name = "createdAt")
     private Date createdAt;
 
+    @Expose
     @Column(name = "updatedAt")
     private Date updatedAt;
 
+    @Expose
     @Column(name = "deletedAT")
     private Date deletedAt;
 

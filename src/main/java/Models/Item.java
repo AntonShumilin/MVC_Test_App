@@ -10,7 +10,7 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public int id;
+    public long id;
 
     @Expose
     String modifiers;
@@ -44,7 +44,7 @@ public class Item {
     public Item() {
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
