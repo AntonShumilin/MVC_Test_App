@@ -1,0 +1,36 @@
+{
+  "document": {
+    "receipt": {
+      "addressToCheckFiscalSign": "",
+      "buyerAddress": "",
+      "cashTotalSum": 0,
+      "dateTime": "2019-07-23T13:34:00",
+      "ecashTotalSum": 150001,
+      "fiscalDocumentNumber": 209163,
+      "fiscalDriveNumber": "9286000100061087",
+      "fiscalSign": 405351530,
+      "items": [
+        {
+          "name": "АИ-92-К5/Регуляр-92",
+          "price": 4035,
+          "quantity": 37.175,
+          "sum": 150001
+        }
+      ],
+      "kktRegId": "0001566788007313",
+      "nds18": 25000,
+      "operationType": 1,
+      "operator": "Оператор:Дильмухаметова Г.Ю.",
+      "rawData": "AwCEAREEEAA5Mjg2MDAwMTAwMDYxMDg3DQQUADAwMDE1NjY3ODgwMDczMTMgICAg+gMMADc3MDkzNTk3NzAgIBAEBAALMQMA9AMEAMgMN101BAYAMQQYKSxqDgQEABwBAAASBAQAIAEAAB4EAQAB/AMDAPFJArMEDAA0NzU0ODQ3MDU0NzYjBEIABgQTAICILTkyLYo1L5Clo+Or7+AtOTI3BAIAww//AwUABtg+NwITBAMA8UkCrwQBAAGwBAIAqGG+BAEABLwEAQAB/QMcAI6vpeCg4q7gOoSoq+ys4+WgrKXirqKgIIMuni4HBAEAADkEAwDxSQK/BAEAAMAEAQAAwQQBAAAkBAwAd3d3Lm5hbG9nLnJ1owQJAICHkSAyMjI4NbkEAQACTgQCAKhhGAQYAI6OjiAig6Cnr+CurK2l5OLsLZalreLgIvEDNAA0NTUwNDQsIKMuIIygo62o4q6jruDhqiwgr+AtquIgi6WtqK2gLCA4My8xLCCAh5EgMjg1HwQBAAE=",
+      "receiptCode": 3,
+      "requestNumber": 288,
+      "retailPlaceAddress": "455044, г. Магнитогорск, пр-кт Ленина, 83/1, АЗС 285",
+      "senderAddress": "",
+      "shiftNumber": 284,
+      "taxationType": 1,
+      "totalSum": 150001,
+      "user": "ООО \"Газпромнефть-Центр\"",
+      "userInn": "7709359770"
+    }
+  }
+}
