@@ -22,6 +22,6 @@ public class LogoutServlet extends HttpServlet {
         User user = userDAO.getUserBySession(session);
         userDAO.removeSession(session, user);
         response.setStatus(HttpServletResponse.SC_FOUND);
-        response.sendRedirect("/");
+        response.sendRedirect("/api/v1/dashboard");
     }
 }

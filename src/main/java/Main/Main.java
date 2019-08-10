@@ -51,7 +51,7 @@ public class Main {
 
         // сервлеты для обработки форм
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        context.addServlet(new ServletHolder(new DashboardPageServlet(userDAO)), "/");
+        context.addServlet(new ServletHolder(new DashboardPageServlet(userDAO)), "/api/v1/dashboard");
         context.addServlet(new ServletHolder(new AuthServlet(userDAO)), "/login");
         context.addServlet(new ServletHolder(new RegServlet(userDAO)), "/reg");
         context.addServlet(new ServletHolder(new LogoutServlet(userDAO)), "/logout");

@@ -42,7 +42,7 @@ public class AuthServlet extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_OK);
         } else {
             response.setContentType("text/html;charset=utf-8");
-            response.getWriter().println("<a href=\"/\"> Dashboard </a>");
+            response.getWriter().println("<a href=\"/api/v1/dashboard\"> Dashboard </a>");
             response.getWriter().println("<br />");
             response.getWriter().println("<a href=\"/logout\"> Logout </a>");
             response.setStatus(HttpServletResponse.SC_OK);
