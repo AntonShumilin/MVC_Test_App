@@ -35,7 +35,7 @@ public class DBFactoryUtil {
         configuration.setProperty("hibernate.connection.url", Main.config.database);
         configuration.setProperty("hibernate.connection.username", "postgres");
         configuration.setProperty("hibernate.show_sql", hibernate_show_sql);
-        configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
+        //configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         configuration.setProperty("hibernate.format_sql", "true");
         return configuration;
     }

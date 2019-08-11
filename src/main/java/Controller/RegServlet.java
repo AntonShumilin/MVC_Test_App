@@ -2,7 +2,6 @@ package Controller;
 
 import DAO.UserDAO;
 import Models.User;
-import Models.UsersMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
