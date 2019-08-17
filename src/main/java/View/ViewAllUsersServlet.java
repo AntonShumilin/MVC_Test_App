@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 
@@ -30,7 +31,7 @@ public class ViewAllUsersServlet extends HttpServlet {
 
         response.setContentType("application/json");
         for (User user : usersList) {
-            response.getWriter().println(getGsonBuilderExpose().toJson(user));
+            response.getWriter().println(getGsonBuilder().toJson(user));
         }
         response.setStatus(HttpServletResponse.SC_OK);
 

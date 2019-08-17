@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static Main.GetFileFromPageUtil.getFileFromPageUtil;
+import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 public class AdminRegServlet extends HttpServlet {
@@ -23,7 +24,8 @@ public class AdminRegServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
 
-        User userJson = getGsonBuilderExpose().fromJson(getFileFromPageUtil(request).toString(), User.class);
+       // User userJson = getGsonBuilderExpose().fromJson(getFileFromPageUtil(request).toString(), User.class);
+        User userJson = getGsonBuilderExpose().fromJson(request.getReader(), User.class);
 
         String email = userJson.getEmail();
         String password = userJson.getPassword();
@@ -33,24 +35,24 @@ public class AdminRegServlet extends HttpServlet {
         email = email.toLowerCase();
 
         if (userDAO.getUserByEmail(email)!=null) {
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().println("Имя занято");
+//            response.setContentType("text/html;charset=utf-8");
+//            response.getWriter().println("Имя занято");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         if (password.length() < 3) {
-            response.setContentType("text/html;charset=utf-8");
-            response.getWriter().println("Пароль короче 3х символов");
+//            response.setContentType("text/html;charset=utf-8");
+//            response.getWriter().println("Пароль короче 3х символов");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         userDAO.save(new User(email, password, firstName, lastName));
-        response.setContentType("text/html;charset=utf-8");
-        response.getWriter().println("Вы зарегистрированы");
-        response.getWriter().println(" <br />");
-        response.getWriter().println("<a href=\"/api/v1/dashboard\"> Назад </a>");
+//        response.setContentType("text/html;charset=utf-8");
+//        response.getWriter().println("Вы зарегистрированы");
+//        response.getWriter().println(" <br />");
+//        response.getWriter().println("<a href=\"/api/v1/dashboard\"> Назад </a>");
         response.setStatus(HttpServletResponse.SC_OK);
 
 

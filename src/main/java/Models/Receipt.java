@@ -10,6 +10,7 @@ import java.util.List;
 @Table(name = "receipts")
 public class Receipt {
 
+    @Expose
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

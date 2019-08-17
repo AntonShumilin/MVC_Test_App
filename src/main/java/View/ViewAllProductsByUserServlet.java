@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 public class ViewAllProductsByUserServlet extends HttpServlet {

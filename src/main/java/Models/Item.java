@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "items")
 public class Item {
 
+    @Expose
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long id;

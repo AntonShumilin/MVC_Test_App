@@ -38,11 +38,16 @@ public class ViewCheckByIdServlet extends HttpServlet {
         } catch (Exception e) {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().println("косяк");
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         Receipt receipt = receiptDAO.findReceiptkById(checkId);
+        if (receipt == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
         response.setContentType("application/json");
         response.getWriter().println(getGsonBuilderExpose().toJson(receipt));
         response.setStatus(HttpServletResponse.SC_OK);

@@ -66,10 +66,10 @@ public class Main {
         ServletHolder holderViewCheckById = new ServletHolder("ViewCheckById", new ViewCheckByIdServlet(userDAO, receiptDAO));
         context.addServlet(holderViewCheckById, "/api/v1/dashboard/checks/*");
 
-        ServletHolder holderViewProductById = new ServletHolder("iewProductById", new ViewProductByIdServlet(itemDAO, userDAO));
+        ServletHolder holderViewProductById = new ServletHolder("ViewProductById", new ViewProductByIdServlet(itemDAO, userDAO));
         context.addServlet(holderViewProductById, "/api/v1/dashboard/products/*");
 
-        ServletHolder holderViewUserById = new ServletHolder("iewProductById", new ViewUserById(userDAO));
+        ServletHolder holderViewUserById = new ServletHolder("ViewUserById", new ViewUserById(userDAO));
         context.addServlet(holderViewUserById, "/api/v1/admin/users/*");
 
 

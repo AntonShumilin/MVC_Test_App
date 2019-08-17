@@ -50,7 +50,7 @@ public class ViewAndLoadCheks extends HttpServlet {
 
         if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
 
-        Check check = getGsonBuilderExpose().fromJson(getFileFromPageUtil(request).toString(), Check.class);
+        Check check = getGsonBuilderExpose().fromJson(request.getReader(), Check.class);
 
         Receipt receipt = check.document.receipt;
         User user = userDAO.getUserBySession(request.getSession().getId());

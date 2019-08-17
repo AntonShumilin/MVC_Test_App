@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 
@@ -39,8 +40,13 @@ public class ViewUserById extends HttpServlet {
 
         User user = userDAO.findById(userId);
 
+        if (user == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
+
         response.setContentType("application/json");
-        response.getWriter().println(getGsonBuilderExpose().toJson(user));
+        response.getWriter().println(getGsonBuilder().toJson(user));
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }

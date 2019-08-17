@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 public class ViewProfileServlet extends HttpServlet {
@@ -26,7 +27,7 @@ public class ViewProfileServlet extends HttpServlet {
 
         User user = userDAO.getUserBySession(request.getSession().getId());
 
-        String json = getGsonBuilderExpose().toJson(user);
+        String json = getGsonBuilder().toJson(user);
 
         response.setContentType("application/json");
         response.getWriter().println(json);

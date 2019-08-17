@@ -36,11 +36,16 @@ public class ViewProductByIdServlet extends HttpServlet {
         } catch (Exception e) {
             response.setContentType("text/html;charset=utf-8");
             response.getWriter().println("косяк");
-            response.setStatus(HttpServletResponse.SC_OK);
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
 
         Item item = itemDAO.findItemById(itemId);
+
+        if (item == null) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
+        }
 
         response.setContentType("application/json");
         response.getWriter().println(getGsonBuilderExpose().toJson(item));

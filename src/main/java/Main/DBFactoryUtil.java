@@ -8,14 +8,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.concurrent.TimeUnit;
+
 
 public class DBFactoryUtil {
     private static final String hibernate_show_sql = "true";
-    private static final String hibernate_hbm2ddl_auto = "update";
+    private static final String hibernate_hbm2ddl_auto = "";
 
     public final SessionFactory sessionFactory;
 
-    public DBFactoryUtil() {
+    public DBFactoryUtil() throws InterruptedException{
         Configuration configuration = getPostgresConfiguration();
         sessionFactory = createSessionFactory(configuration);
     }
@@ -53,11 +55,22 @@ public class DBFactoryUtil {
 //        }
 //    }
 
-    private static SessionFactory createSessionFactory(Configuration configuration) {
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
+    private static SessionFactory createSessionFactory(Configuration configuration) throws InterruptedException{
+
+        SessionFactory sf = null;
+        do {
+            try {
+                StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
+                builder.applySettings(configuration.getProperties());
+                ServiceRegistry serviceRegistry = builder.build();
+                sf = configuration.buildSessionFactory(serviceRegistry);
+                return sf;
+            } catch (Exception e) {
+                System.out.println("No DB connection, next try in 5 sec...");;
+                TimeUnit.SECONDS.sleep(5);
+            }
+        } while (sf==null);
+    return sf;
     }
 
     public void sessionFactoryClose() {

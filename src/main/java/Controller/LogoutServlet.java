@@ -16,12 +16,12 @@ public class LogoutServlet extends HttpServlet {
         this.userDAO = userDAO;
     }
 
-    public void doGet(HttpServletRequest request,
+    public void doPost(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
         String session = request.getSession().getId();
         User user = userDAO.getUserBySession(session);
         userDAO.removeSession(session, user);
-        response.setStatus(HttpServletResponse.SC_FOUND);
-        response.sendRedirect("/api/v1/dashboard");
+        response.setStatus(HttpServletResponse.SC_OK);
+        //response.sendRedirect("/api/v1/dashboard");
     }
 }
