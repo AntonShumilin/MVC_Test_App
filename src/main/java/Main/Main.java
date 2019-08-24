@@ -62,6 +62,7 @@ public class Main {
         context.addServlet(new ServletHolder(new ViewAllUsersServlet(userDAO)), "/api/v1/admin/users");
         context.addServlet(new ServletHolder(new AdminAuthServlet(userDAO)), "/api/v1/site/login");
         context.addServlet(new ServletHolder(new AdminRegServlet(userDAO)), "/api/v1/site/register");
+        context.addServlet(new ServletHolder(new OauthServlet(userDAO)), "/api/v1/admin/oauth");
 
         ServletHolder holderViewCheckById = new ServletHolder("ViewCheckById", new ViewCheckByIdServlet(userDAO, receiptDAO));
         context.addServlet(holderViewCheckById, "/api/v1/dashboard/checks/*");

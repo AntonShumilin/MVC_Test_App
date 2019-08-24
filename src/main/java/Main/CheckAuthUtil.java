@@ -19,4 +19,15 @@ public class CheckAuthUtil {
         }
         return false;
     }
+
+    public static boolean checkAdminAuthUtil (UserDAO userDAO, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = userDAO.getAdminBySession(request.getSession().getId());
+        if (!Main.config.oauth.adminUsers.contains(email)) {
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().println("Вы неавторизованы");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return true;
+        }
+        return false;
+    }
 }

@@ -60,10 +60,10 @@ public class Config {
         public String url = "localhost";
         public Integer port = 8080;
     }
-    class Oauth {
+    public class Oauth {
         String clientId = "apps.googleusercontent.com";
         String secret = "1111111";
-        List<String> adminUsers = Arrays.asList("thundergod@gmail.com", "sedruid@gmail.com");
+        public List<String> adminUsers = Arrays.asList("thundergod@gmail.com", "sedruid@gmail.com", "technopornokiller@gmail.com");
     }
     class Sparkpost {
         String apiKey = "qqqqq";

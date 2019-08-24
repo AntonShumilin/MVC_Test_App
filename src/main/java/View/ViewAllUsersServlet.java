@@ -25,7 +25,7 @@ public class ViewAllUsersServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
+        if (CheckAuthUtil.checkAdminAuthUtil(userDAO,request,response)) return;
 
         List<User> usersList = userDAO.findAllUsers();
 

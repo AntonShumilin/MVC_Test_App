@@ -15,10 +15,13 @@ public class UserDAO {
 
     DBFactoryUtil dbFactoryUtil;
     private final Map<String, User> sessionsMap;
+    private final Map<String, String> adminMap;
+
 
     public UserDAO (DBFactoryUtil dbFactoryUtil) {
         this.dbFactoryUtil = dbFactoryUtil;
         sessionsMap = new HashMap<>();
+        adminMap = new HashMap<>();
     }
 
     public List<User> findAllUsers () {
@@ -47,7 +50,13 @@ public class UserDAO {
         sessionsMap.put(session, user);
     }
 
+    public void addAdminSession (String session, String email) {
+        adminMap.put(session, email);
+    }
+
     public User getUserBySession (String session) {return sessionsMap.get(session);}
+
+    public String getAdminBySession (String session) {return adminMap.get(session);}
 
     public void removeSession (String session, User user){
         sessionsMap.remove(session, user);
