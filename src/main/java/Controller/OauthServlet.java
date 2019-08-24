@@ -30,7 +30,7 @@ public class OauthServlet extends HttpServlet {
         String code = request.getParameter("code");
         if (code == null) {
             String url = "https://accounts.google.com/o/oauth2/v2/auth" +
-                    "?client_id=60348066914-6sfj01c2vbmrqfvqcv4aifpe8vs9tp5f.apps.googleusercontent.com" +
+                    "?client_id=" + Main.config.oauth.clientId +
                     "&redirect_uri=http://localhost:8080/api/v1/admin/oauth" +
                     "&response_type=code" +
                     "&scope=email";
@@ -65,8 +65,8 @@ public class OauthServlet extends HttpServlet {
         OkHttpClient client = new OkHttpClient();
         RequestBody requestBody = new FormEncodingBuilder()
                 .add("grant_type", "authorization_code")
-                .add("client_id", "60348066914-6sfj01c2vbmrqfvqcv4aifpe8vs9tp5f.apps.googleusercontent.com")
-                .add("client_secret", "1k21QHlKbExVEdwdlep4wFvX")
+                .add("client_id", Main.config.oauth.clientId)
+                .add("client_secret", Main.config.oauth.secret)
                 .add("code", authCode)
                 .add("redirect_uri", "http://localhost:8080/api/v1/admin/oauth")
                 .build();

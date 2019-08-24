@@ -61,9 +61,9 @@ public class Config {
         public Integer port = 8080;
     }
     public class Oauth {
-        String clientId = "apps.googleusercontent.com";
-        String secret = "1111111";
-        public List<String> adminUsers = Arrays.asList("thundergod@gmail.com", "sedruid@gmail.com", "technopornokiller@gmail.com");
+        public String clientId;
+        public String secret;
+        public List<String> adminUsers;
     }
     class Sparkpost {
         String apiKey = "qqqqq";

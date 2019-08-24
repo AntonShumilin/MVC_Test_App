@@ -1,6 +1,0 @@
-{
-  "app": {
-    "port": 8080
-  },
-  "database": "jdbc:postgresql://localhost:5432/postgres"
-}
