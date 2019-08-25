@@ -1,5 +1,5 @@
 *.json
-!config_samle.json
+!config_sample.json
 /target
 *.impl
 *.jar
