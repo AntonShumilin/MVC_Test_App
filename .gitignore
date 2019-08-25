@@ -1,0 +1,7 @@
+*.sh
+*.jar
+*.impl
+*.json
+!config.json
+/test
+/target

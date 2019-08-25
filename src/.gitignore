@@ -1,5 +1,0 @@
-*.sh
-*.jar
-*.impl
-*.json
-!config.json
