@@ -20,8 +20,26 @@ public class LogoutServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
         String session = request.getSession().getId();
         User user = userDAO.getUserBySession(session);
-        userDAO.removeSession(session, user);
+        String email = userDAO.getAdminBySession(session);
+        if (user != null) {
+            userDAO.removeSession(session, user);
+        }
+        if (email != null) {
+            userDAO.removeAdminSession(session, email);
+        }
         response.setStatus(HttpServletResponse.SC_OK);
-        //response.sendRedirect("/api/v1/dashboard");
+    }
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response) throws ServletException, IOException {
+        String session = request.getSession().getId();
+        User user = userDAO.getUserBySession(session);
+        String email = userDAO.getAdminBySession(session);
+        if (user != null) {
+            userDAO.removeSession(session, user);
+        }
+        if (email != null) {
+            userDAO.removeAdminSession(session, email);
+        }
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

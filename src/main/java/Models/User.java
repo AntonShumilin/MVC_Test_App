@@ -10,6 +10,7 @@ import java.util.Date;
 @Table(name = "users")
 public class User implements Serializable {
 
+    @Expose
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

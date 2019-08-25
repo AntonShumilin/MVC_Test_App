@@ -3,10 +3,11 @@ package Models;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "items")
-public class Item {
+public class Item implements Serializable {
 
     @Expose
     @Id

@@ -2,7 +2,6 @@ package View;
 
 import DAO.ReceiptDAO;
 import DAO.UserDAO;
-import Main.CheckAuthUtil;
 import Models.Receipt;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class ViewCheckByIdServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
+        if (userDAO.checkAuthUtil(userDAO,request,response)) return;
 
         String pathInfo = request.getPathInfo();
         pathInfo = pathInfo.replace("/","");

@@ -2,13 +2,7 @@ package View;
 
 import DAO.ReceiptDAO;
 import DAO.UserDAO;
-import Main.CheckAuthUtil;
-import Main.GetFileFromPageUtil;
 import Models.*;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.hibernate.HibernateException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static Main.GetFileFromPageUtil.getFileFromPageUtil;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
+import static View.UtilMethods.*;
 
 public class ViewAndLoadCheks extends HttpServlet {
 
@@ -33,22 +27,18 @@ public class ViewAndLoadCheks extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
+        if (userDAO.checkAuthUtil(userDAO,request,response)) return;
 
         User user = userDAO.getUserBySession(request.getSession().getId());
 
         List<Receipt> checkView = receiptDAO.findAllReceiptsByUserId(user.getId());
 
-        response.setContentType("application/json");
-        for (Receipt receipt: checkView) {
-            response.getWriter().println(getGsonBuilderExpose().toJson(receipt));
-        }
-        response.setStatus(HttpServletResponse.SC_OK);
+        sendListOfJson(checkView, request, response);
         }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
+        if (userDAO.checkAuthUtil(userDAO,request,response)) return;
 
         Check check = getGsonBuilderExpose().fromJson(request.getReader(), Check.class);
 

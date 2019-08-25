@@ -2,9 +2,7 @@ package View;
 
 import DAO.UserDAO;
 import Main.Main;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import Main.CheckAuthUtil;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +21,7 @@ public class GetJSONServlet extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAuthUtil(userDAO,request,response)) return;
+        if (userDAO.checkAuthUtil(userDAO,request,response)) return;
 
         String json = getGsonBuilder().toJson(Main.config);
 

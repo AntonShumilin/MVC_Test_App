@@ -1,7 +1,6 @@
 package View;
 
 import DAO.UserDAO;
-import Main.CheckAuthUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +20,7 @@ public class DashboardPageServlet extends HttpServlet {
                       HttpServletResponse response) throws ServletException, IOException {
 
 
-        CheckAuthUtil.checkAuthUtil(userDAO,request,response);
+        userDAO.checkAuthUtil(userDAO,request,response);
 
         response.setContentType("text/html;charset=utf-8");
         response.getWriter().println("<!DOCTYPE html>");
@@ -65,6 +64,8 @@ public class DashboardPageServlet extends HttpServlet {
         response.getWriter().println("<a href=\"/api/v1/admin/users/1\"> /api/v1/admin/users/1 </a>");
         response.getWriter().println("<br />");
         response.getWriter().println("<a href=\"/getConfigJson\"> /getConfigJson </a>");
+        response.getWriter().println("<br />");
+        response.getWriter().println("<a href=\"/api/v1/admin/oauth\"> /api/v1/admin/oauth </a>");
         response.getWriter().println("<br />");
         response.getWriter().println("<br />");
         response.getWriter().println("<fieldset>");

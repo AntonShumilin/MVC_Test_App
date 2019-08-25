@@ -1,6 +1,5 @@
 package View;
 import DAO.UserDAO;
-import Main.CheckAuthUtil;
 import Models.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import static Main.GsonBuilderUtil.getGsonBuilder;
-import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 
 
 public class ViewUserById extends HttpServlet {
@@ -23,7 +21,7 @@ public class ViewUserById extends HttpServlet {
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws ServletException, IOException {
 
-        if (CheckAuthUtil.checkAdminAuthUtil(userDAO,request,response)) return;
+        if (userDAO.checkAdminAuthUtil(userDAO,request,response)) return;
 
         String pathInfo = request.getPathInfo();
         pathInfo = pathInfo.replace("/","");

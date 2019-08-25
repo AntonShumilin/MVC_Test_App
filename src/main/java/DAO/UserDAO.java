@@ -1,12 +1,17 @@
 package DAO;
 
 import Main.DBFactoryUtil;
+import Main.Main;
 import Models.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +65,33 @@ public class UserDAO {
 
     public void removeSession (String session, User user){
         sessionsMap.remove(session, user);
+    }
+
+    public void removeAdminSession (String session, String email){
+        adminMap.remove(session, email);
+    }
+
+    public static boolean checkAuthUtil (UserDAO userDAO, HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+        if (userDAO.getUserBySession(request.getSession().getId()) == null) {
+            response.setContentType("text/html;charset=utf-8");
+            response.getWriter().println("Вы неавторизованы");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean checkAdminAuthUtil (UserDAO userDAO, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = userDAO.getAdminBySession(request.getSession().getId());
+        if (!Main.config.oauth.adminUsers.contains(email)) {
+            response.sendRedirect("/api/v1/admin/oauth");
+//            response.setContentType("text/html;charset=utf-8");
+//            response.getWriter().println("Вы неавторизованы");
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return true;
+        }
+        return false;
     }
 
 
