@@ -60,8 +60,13 @@ public class UtilMethods {
 
         if ((offsetInt + limitInt) > list.size()) limitInt = list.size() - offsetInt + 1;
 
-        for (int i = offsetInt - 1; i < offsetInt - 1 + limitInt; i++) {
-            sendList.add(list.get(i));
+        try {
+            for (int i = offsetInt - 1; i < offsetInt - 1 + limitInt; i++) {
+                sendList.add(list.get(i));
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            return;
         }
         response.setContentType("application/json");
         for (T t : sendList) {

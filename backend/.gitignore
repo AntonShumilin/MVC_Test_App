@@ -1,4 +1,4 @@
 /target
 *.impl
 *.json
-!config_sample.json
+!config.sample.json
