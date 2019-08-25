@@ -1,0 +1,41 @@
+{
+  "app": {
+    "env": "",
+    "secret": "",
+    "url": "",
+    "port": 
+  },
+  "database": "",
+  "oauth": {
+    "clientId": "",
+    "secret": "",
+    "adminUsers": [
+      
+    ]
+  },
+  "sparkpost": {
+    "apiKey": "",
+    "ipPool": "",
+    "returnPath": ""
+  },
+  "google": {
+    "analytics": "",
+    "maps": ""
+  },
+  "uploadcare": {
+    "publicKey": ""
+  },
+  "maildev": {
+    "host": "",
+    "web": ,
+    "smtp": ,
+    "basePathname": ""
+  },
+  "github": {
+    "accessToken": ""
+  },
+  "telegram": {
+    "bot": "",
+    "leadsChat": ""
+  }
+}
