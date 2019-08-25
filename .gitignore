@@ -1,6 +1,7 @@
 *.json
 !config_sample.json
 /target
+/.idea
 *.impl
 *.jar
-.sh
+*.sh
