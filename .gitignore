@@ -1,7 +1,3 @@
-*.sh
-*.jar
-*.impl
-*.json
-!config.json
+user111.json
 /test
 /target
