@@ -44,7 +44,7 @@ public class AdminRegServlet extends HttpServlet {
         }
 
         userDAO.save(new User(email, password, firstName, lastName));
-        //test
+       
         response.setStatus(HttpServletResponse.SC_OK);
 
 
