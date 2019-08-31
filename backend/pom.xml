@@ -29,7 +29,7 @@
                 <configuration>
                     <driver>org.postgresql.Driver</driver>
                     <url>jdbc:postgresql://localhost:5432/postgres?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=UTF-8</url>
-                    <baseDir>db/migration</baseDir>
+                    <baseDir>/db/migration</baseDir>
                     <user>postgres</user>
                 </configuration>
             </plugin>

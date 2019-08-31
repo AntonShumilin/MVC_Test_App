@@ -3,8 +3,9 @@ package View;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import static Main.GsonBuilderUtil.getGsonBuilder;
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
@@ -45,11 +46,9 @@ public class UtilMethods {
             }
         }
 
-
         if (offset != null && limit != null) {
             try {
                 offsetInt = Integer.parseInt(offset);
-                if (offsetInt > list.size()) throw new Exception();
                 limitInt = Integer.parseInt(limit);
 
             } catch (Exception e) {
@@ -59,7 +58,7 @@ public class UtilMethods {
         }
 
         if ((offsetInt + limitInt) > list.size()) limitInt = list.size() - offsetInt + 1;
-
+        if (offsetInt < 1) offsetInt = 1;
         try {
             for (int i = offsetInt - 1; i < offsetInt - 1 + limitInt; i++) {
                 sendList.add(list.get(i));

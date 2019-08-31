@@ -5,16 +5,18 @@ import DAO.UserDAO;
 import Models.Item;
 import Models.Receipt;
 import Models.User;
+import javafx.print.Collation;
+import org.hibernate.mapping.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
-import static Main.GsonBuilderUtil.getGsonBuilderExpose;
-import static View.UtilMethods.sendListOfJson;
+import static View.UtilMethods.*;
 
 public class ViewAllProductsByUserServlet extends HttpServlet {
 
@@ -34,9 +36,13 @@ public class ViewAllProductsByUserServlet extends HttpServlet {
         User user = userDAO.getUserBySession(request.getSession().getId());
 
         List<Receipt> checkView = receiptDAO.findAllReceiptsByUserId(user.getId());
+        List<Item> list = new LinkedList<>();
 
         for (Receipt receipt : checkView) {
-            sendListOfJson(receipt.items, request, response);
+                list.addAll(receipt.items);
         }
+        sortListOfJson(list, request.getParameter("sort"));
+        sendListOfJson(list, request, response);
+
     }
 }

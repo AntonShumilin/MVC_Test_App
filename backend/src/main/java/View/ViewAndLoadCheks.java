@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import static Main.GsonBuilderUtil.getGsonBuilderExpose;
@@ -31,8 +34,11 @@ public class ViewAndLoadCheks extends HttpServlet {
 
         User user = userDAO.getUserBySession(request.getSession().getId());
 
-        List<Receipt> checkView = receiptDAO.findAllReceiptsByUserId(user.getId());
+        DateParams dateParams = parseDateParam(request);
 
+        List<Receipt> checkView = receiptDAO.findAllReceiptsWithFilters(user.getId(), dateParams, request.getParameter("merchInn"));
+
+        sortListOfJson(checkView, request.getParameter("sort"));
         sendListOfJson(checkView, request, response);
         }
 
@@ -40,13 +46,14 @@ public class ViewAndLoadCheks extends HttpServlet {
 
         if (userDAO.checkAuthUtil(userDAO,request,response)) return;
 
-        Check check = getGsonBuilderExpose().fromJson(request.getReader(), Check.class);
+        Check check = getGsonBuilderExposeDateFormat().fromJson(request.getReader(), Check.class);
 
         Receipt receipt = check.document.receipt;
         User user = userDAO.getUserBySession(request.getSession().getId());
-        receipt.setUserID(user.getId());
+        receipt.setUserIDandName(user.getId());
         for (Item it: receipt.items) {
             it.setReceipt(receipt);
+            it.dateTime = receipt.dateTime;
         }
 
         try {

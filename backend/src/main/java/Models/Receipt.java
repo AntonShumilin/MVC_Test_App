@@ -5,11 +5,12 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "receipts")
-public class Receipt implements Serializable {
+public class Receipt  extends SortedObject implements Serializable{
 
     @Expose
     @Id
@@ -28,11 +29,12 @@ public class Receipt implements Serializable {
     @Expose
     public String cashTotalSum;
     @Expose
-    public String dateTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateTime;
     @Expose
     public String ecashTotalSum;
     @Expose
-    @Column(name = "fiscalDocumentNumber", unique = true, updatable = false)
+//    @Column(name = "fiscalDocumentNumber", unique = true, updatable = false)
     public String fiscalDocumentNumber;
     @Expose
     public String fiscalDriveNumber;
@@ -75,6 +77,8 @@ public class Receipt implements Serializable {
     @Expose
     public String userInn;
 
+    public String name;
+
     public Receipt() {
     }
 
@@ -82,7 +86,19 @@ public class Receipt implements Serializable {
         return id;
     }
 
-        public void setUserID(long userId) {
+        public void setUserIDandName(long userId) {
         this.userId = userId;
+        if (user != null) this.name = userInn + " " + user;
+        else this.name = userInn;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Date getDateTime() {
+        return dateTime;
     }
 }

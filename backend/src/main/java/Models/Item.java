@@ -4,10 +4,11 @@ import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "items")
-public class Item implements Serializable {
+public class Item extends SortedObject implements Serializable {
 
     @Expose
     @Id
@@ -38,6 +39,9 @@ public class Item implements Serializable {
     String sum;
     @Expose
     String storno;
+    @Expose
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "receiptId")
@@ -152,6 +156,11 @@ public class Item implements Serializable {
 
     public void setStorno(String storno) {
         this.storno = storno;
+    }
+
+    @Override
+    public Date getDateTime() {
+        return dateTime;
     }
 
     public void setReceipt(Receipt receipt) {
