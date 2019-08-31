@@ -39,8 +39,6 @@ public class AdminRegServlet extends HttpServlet {
         }
 
         if (password.length() < 3) {
-//            response.setContentType("text/html;charset=utf-8");
-//            response.getWriter().println("Пароль короче 3х символов");
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
