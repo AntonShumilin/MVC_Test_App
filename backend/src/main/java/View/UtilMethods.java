@@ -20,40 +20,22 @@ public class UtilMethods {
         Integer limitInt = 0;
         List<T> sendList = new LinkedList<T>();
 
-        if (offset == null && limit == null) {
-            offsetInt = 1;
-            limitInt = list.size();
+        if (limit == null) limitInt = 10;
+        else {
+            try {
+                limitInt = Integer.parseInt(limit);
+            } catch (Exception e) {
+                limitInt =10;
+            }
         }
 
-        if (offset != null && limit == null) {
+        if (offset == null) offsetInt = 1;
+        else {
             try {
                 offsetInt = Integer.parseInt(offset);
                 if (offsetInt > list.size()) throw new Exception();
             } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return;
-            }
-            limitInt = list.size();
-        }
-
-        if (offset == null && limit != null) {
-            offsetInt = 1;
-            try {
-                limitInt = Integer.parseInt(limit);
-            } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return;
-            }
-        }
-
-        if (offset != null && limit != null) {
-            try {
-                offsetInt = Integer.parseInt(offset);
-                limitInt = Integer.parseInt(limit);
-
-            } catch (Exception e) {
-                response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-                return;
+                offsetInt = 1;
             }
         }
 
@@ -64,8 +46,7 @@ public class UtilMethods {
                 sendList.add(list.get(i));
             }
         } catch (Exception e) {
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            e.printStackTrace();
         }
         response.setContentType("application/json");
         for (T t : sendList) {

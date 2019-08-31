@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User extends SortedObject implements Serializable {
 
     @Expose
     @Id
@@ -33,33 +33,30 @@ public class User implements Serializable {
     private String lastName;
 
     @Expose
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "createdAt")
     private Date createdAt;
 
     @Expose
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "updatedAt")
     private Date updatedAt;
 
     @Expose
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "deletedAT")
     private Date deletedAt;
+
+    @Expose
+    private String name;
+
+    @Expose
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
 
     public User () {
 
     }
-
-
-
-
-
-//    public HashMap <String, Check> userChecks = new HashMap<String, Check>();
-//
-//    public void addCheck (Check check) {
-//        userChecks.put(check.document.receipt.dateTime + check.document.receipt.fiscalSign, check);
-//    }
-//    public Check getCheckByFS (String fs) {
-//        return userChecks.get(fs);
-//    }
 
 
     public User(String email, String password, String firstName, String lastName) {
@@ -68,7 +65,8 @@ public class User implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.createdAt = new Date();
-        this.updatedAt = createdAt;
+        this.dateTime = createdAt;
+        this.name = lastName + " " + firstName;
     }
 
         public User(String email, String password) {
@@ -94,7 +92,13 @@ public class User implements Serializable {
         return lastName;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public Date getDateTime() {
+        return dateTime;
+    }
 
     public Date getCreatedAt() {
         return createdAt;

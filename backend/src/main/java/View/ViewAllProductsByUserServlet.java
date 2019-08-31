@@ -2,6 +2,7 @@ package View;
 
 import DAO.ReceiptDAO;
 import DAO.UserDAO;
+import Models.DateParams;
 import Models.Item;
 import Models.Receipt;
 import Models.User;
@@ -35,7 +36,12 @@ public class ViewAllProductsByUserServlet extends HttpServlet {
 
         User user = userDAO.getUserBySession(request.getSession().getId());
 
-        List<Receipt> checkView = receiptDAO.findAllReceiptsByUserId(user.getId());
+//        List<Receipt> checkView = receiptDAO.findAllReceiptsByUserId(user.getId());
+
+        DateParams dateParams = parseDateParam(request);
+
+        List<Receipt> checkView = receiptDAO.findAllReceiptsWithFilters(user.getId(), dateParams, request.getParameter("merchInn"));
+
         List<Item> list = new LinkedList<>();
 
         for (Receipt receipt : checkView) {

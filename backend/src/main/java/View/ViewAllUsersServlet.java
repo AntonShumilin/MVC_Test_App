@@ -29,6 +29,7 @@ public class ViewAllUsersServlet extends HttpServlet {
 
         List<User> usersList = userDAO.findAllUsers();
 
+        sortListOfJson(usersList, request.getParameter("sort"));
         sendListOfJson(usersList, request, response);
 
     }

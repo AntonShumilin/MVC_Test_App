@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class DBFactoryUtil {
     private static final String hibernate_show_sql = "true";
-    private static final String hibernate_hbm2ddl_auto = "create";
+    private static final String hibernate_hbm2ddl_auto = "update";
 
     public final SessionFactory sessionFactory;
 
