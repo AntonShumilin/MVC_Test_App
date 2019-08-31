@@ -44,10 +44,7 @@ public class AdminRegServlet extends HttpServlet {
         }
 
         userDAO.save(new User(email, password, firstName, lastName));
-//        response.setContentType("text/html;charset=utf-8");
-//        response.getWriter().println("Вы зарегистрированы");
-//        response.getWriter().println(" <br />");
-//        response.getWriter().println("<a href=\"/api/v1/dashboard\"> Назад </a>");
+
         response.setStatus(HttpServletResponse.SC_OK);
 
 
