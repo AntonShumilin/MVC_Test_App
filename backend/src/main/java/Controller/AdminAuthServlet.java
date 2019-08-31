@@ -21,11 +21,9 @@ public class AdminAuthServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
+                       HttpServletResponse response) throws IOException {
 
         User userJson = getGsonBuilderExpose().fromJson(request.getReader(), User.class);
-
-        //User userJson = getGsonBuilderExpose().fromJson(getFileFromPageUtil(request).toString(), User.class);
 
         String email = userJson.getEmail();
         String password = userJson.getPassword();
