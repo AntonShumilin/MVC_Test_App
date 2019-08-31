@@ -19,7 +19,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-import static Main.GsonBuilderUtil.getGsonBuilder;
+import static View.UtilMethods.*;
 
 
 public class Main {

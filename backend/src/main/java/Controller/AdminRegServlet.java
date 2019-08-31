@@ -9,9 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static Main.GetFileFromPageUtil.getFileFromPageUtil;
-import static Main.GsonBuilderUtil.getGsonBuilder;
-import static Main.GsonBuilderUtil.getGsonBuilderExpose;
+import static View.UtilMethods.*;
 
 public class AdminRegServlet extends HttpServlet {
 

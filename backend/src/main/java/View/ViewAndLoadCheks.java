@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static Main.GsonBuilderUtil.getGsonBuilderExpose;
 import static View.UtilMethods.*;
 
 public class ViewAndLoadCheks extends HttpServlet {
