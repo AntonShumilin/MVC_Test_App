@@ -29,7 +29,7 @@ public class AdminAuthServlet extends HttpServlet {
         String password = userJson.getPassword();
 
         if (email == null || password == null) {
-//            response.setContentType("text/html;charset=utf-8");
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
