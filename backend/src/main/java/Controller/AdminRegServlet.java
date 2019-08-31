@@ -33,8 +33,7 @@ public class AdminRegServlet extends HttpServlet {
         email = email.toLowerCase();
 
         if (userDAO.getUserByEmail(email)!=null) {
-//            response.setContentType("text/html;charset=utf-8");
-//            response.getWriter().println("Имя занято");
+
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
