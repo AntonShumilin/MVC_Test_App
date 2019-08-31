@@ -1,0 +1,39 @@
+{
+  "app": {
+    "env": "development",
+    "secret": "dev-secret",
+    "url": "localhost",
+    "port": 8080
+  },
+  "database": "jdbc:postgresql://localhost:5432/postgres",
+  "oauth": {
+    "clientId":"" ,
+    "secret": "",
+    "adminUsers": [ ]
+  },
+  "sparkpost": {
+    "apiKey": "",
+    "ipPool": "",
+    "returnPath": ""
+  },
+  "google": {
+    "analytics": "",
+    "maps": ""
+  },
+  "uploadcare": {
+    "publicKey": ""
+  },
+  "maildev": {
+    "host": "127.0.0.1",
+    "web": 3201,
+    "smtp": 3202,
+    "basePathname": "/mailbox"
+  },
+  "github": {
+    "accessToken": ""
+  },
+  "telegram": {
+    "bot": "",
+    "leadsChat": ""
+  }
+}
