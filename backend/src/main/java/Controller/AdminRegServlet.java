@@ -22,7 +22,7 @@ public class AdminRegServlet extends HttpServlet {
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
 
-       // User userJson = getGsonBuilderExpose().fromJson(getFileFromPageUtil(request).toString(), User.class);
+
         User userJson = getGsonBuilderExpose().fromJson(request.getReader(), User.class);
 
         String email = userJson.getEmail();
