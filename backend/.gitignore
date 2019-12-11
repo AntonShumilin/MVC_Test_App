@@ -1,3 +1,2 @@
 *.impl
 *.json
-!config.sample.json
