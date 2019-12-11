@@ -47,12 +47,12 @@ public class User extends SortedObject implements Serializable {
     @Column(name = "deletedAT")
     private Date deletedAt;
 
-    @Expose
-    private String name;
+//    @Expose
+//    private String name;
 
-    @Expose
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateTime;
+//    @Expose
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date dateTime;
 
     public User () {
 

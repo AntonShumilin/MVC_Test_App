@@ -29,11 +29,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        DBFactoryUtil dbFactoryUtil = new DBFactoryUtil();
-        UserDAO userDAO = new UserDAO(dbFactoryUtil);
-        ReceiptDAO receiptDAO = new ReceiptDAO(dbFactoryUtil);
-        ItemDAO itemDAO = new ItemDAO(dbFactoryUtil);
-
         // читаем конфиг
         StringBuilder sb = new StringBuilder();
         String s = "";
@@ -47,6 +42,13 @@ public class Main {
         } catch (Exception e){
             System.out.println("No config file / Config file not valid");
         }
+
+        DBFactoryUtil dbFactoryUtil = new DBFactoryUtil();
+        UserDAO userDAO = new UserDAO(dbFactoryUtil);
+        ReceiptDAO receiptDAO = new ReceiptDAO(dbFactoryUtil);
+        ItemDAO itemDAO = new ItemDAO(dbFactoryUtil);
+
+
 
         // сервлеты для обработки форм
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);

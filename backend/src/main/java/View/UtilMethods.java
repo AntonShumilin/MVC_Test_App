@@ -2,7 +2,6 @@ package View;
 
 import Models.DateParams;
 import Models.Output;
-import Models.Receipt;
 import Models.SortedObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -12,9 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-
-import static View.UtilMethods.*;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UtilMethods {
 
@@ -117,10 +117,11 @@ public class UtilMethods {
     }
 
     public static  <T extends SortedObject> void sortListOfJson (List<T> list, String sortType) {
+        if (sortType==null) return;
         Comparator <T> comp;
         if (list == null | list.isEmpty()) return;
 
-        if (sortType == "alphabet") {
+        if (sortType.equals("alphabet")) {
             comp = (o1, o2) -> String.CASE_INSENSITIVE_ORDER.compare(o2.getName(), o1.getName());
         } else {
             comp = new Comparator<T>() {

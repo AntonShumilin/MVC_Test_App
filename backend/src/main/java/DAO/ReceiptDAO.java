@@ -31,11 +31,7 @@ public class ReceiptDAO {
 
     public List<Receipt> findAllReceiptsWithFilters (long userId, DateParams dateParams, String userInn) {
         if (userInn == null) {
-            try {
-                if (dateParams.afteDate == null) dateParams.afteDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("1970-01-01T00:00:00");
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
+            if (dateParams.afteDate == null) dateParams.afteDate = new Date(Integer.MIN_VALUE);//SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss").parse("1970-01-01T00:00:00");
             if (dateParams.beforeDate == null) dateParams.beforeDate = new Date();
             Criteria criteria = dbFactoryUtil.sessionFactory.openSession().createCriteria(Receipt.class)
                     .add(Restrictions.eq("userId", userId))
