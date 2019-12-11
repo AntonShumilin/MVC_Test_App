@@ -2,4 +2,5 @@
 /target
 *.impl
 !config.sample.json
+!config.json
 .idea
